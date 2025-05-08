@@ -1,0 +1,1062 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Situs Goblok</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co.com/fdqr7XCB/1746580723742.png">
+  <!-- Font "Cal Sans" -->
+  <link href="https://fonts.googleapis.com/css2?family=Cal+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!-- CSS -->
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #story *:not(.clickable) {
+    user-select: none; /* Mencegah penyalinan teks */
+    pointer-events: none; /* Mencegah klik */
+  }
+
+    body {
+      font-family: 'Cal Sans', sans-serif; /* Ganti font menjadi Cal Sans */
+      background: linear-gradient(to bottom, #87CEEB, #f0f8ff); /* Background kebiruan */
+      background-attachment: fixed; /* Tetap */
+      background-repeat: no-repeat; /* Mencegah pengulangan */
+      background-size: cover; /* Pastikan latar belakang menutupi seluruh layar */
+      color: #333; /* Warna teks gelap */
+      line-height: 1.6;
+      overflow-x: hidden;
+      animation: fadeIn 1.5s ease-in-out; /* Animasi fade-in */
+    }
+
+  
+  /* Media Query untuk layar kecil (mobile) */
+  @media (max-width: 768px) {
+    #calculator {
+      position: static; /* Ubah posisi menjadi statis */
+      margin: 20px auto; /* Tambahkan margin untuk memisahkan */
+      width: 90%; /* Sesuaikan lebar */
+    }
+
+    #date-time-logo {
+      position: static; /* Ubah posisi menjadi statis */
+      margin: 20px auto; /* Tambahkan margin untuk memisahkan */
+      width: 90%; /* Sesuaikan lebar */
+    }
+
+    body {
+      padding: 10px; /* Tambahkan padding untuk ruang di sekitar konten */
+    }
+  }
+
+   
+    /* Intro Section */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8); /* Latar belakang semi-transparan */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #intro h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #007BFF;
+    }
+
+    #intro p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #intro button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      pointer-events: auto; /* Izinkan klik pada tombol */
+    }
+
+    #intro button:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+ 
+
+    /* Main Content */
+    main {
+      display: none; /* Sembunyikan storytelling hingga tombol ditekan */
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8); /* Latar belakang semi-transparan */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #story h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #007BFF;
+    }
+
+    #story p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    #next-button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      pointer-events: auto; /* Izinkan klik pada tombol */
+    }
+
+    /* Teks menyeramkan */
+#scary-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Creepster', cursive; /* Gunakan font menyeramkan */
+  font-size: 5rem;
+  color: red;
+  text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+  z-index: 10000; /* Pastikan berada di atas semua elemen */
+  display: none; /* Sembunyikan secara default */
+  pointer-events: none; /* Mencegah interaksi dengan teks */
+}
+
+    #next-button:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+ /* Animasi untuk logo Aether */
+ @keyframes aether-logo-animation {
+    0% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translate(-50%, -45%) scale(1.1) rotate(15deg);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    75% {
+      transform: translate(-50%, -55%) scale(0.9) rotate(-15deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+  }
+
+  /* Terapkan animasi ke elemen dengan class .story-logo */
+  .story-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: aether-logo-animation 3s infinite ease-in-out;
+    cursor: pointer;
+    width: 150px;
+    height: auto;
+  }
+    /* Animasi Pulse */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Animasi Fade-In */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Latar belakang animasi */
+#fire-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Pastikan berada di belakang konten */
+  background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
+}
+
+/* Angka-angka api */
+.fire-number {
+  position: absolute;
+  font-size: 2rem;
+  font-family: 'Cal Sans', sans-serif;
+  color: white;
+  text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+  animation: rise 3s linear infinite, flicker 0.1s infinite;
+  pointer-events: none; /* Mencegah interaksi dengan angka */
+}
+
+/* Animasi naik ke atas */
+@keyframes rise {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Animasi berkedip */
+@keyframes flicker {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Kalkulator */
+#calculator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-family: 'Cal Sans', sans-serif; /* Gunakan font Cal Sans */
+  font-size: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px white; /* Glow putih */
+  z-index: 1000; /* Pastikan berada di atas elemen lainnya */
+  user-select: none; /* Mencegah teks disalin */
+  text-align: center;
+  width: 200px;
+}
+
+#calc-display {
+  background: rgba(255, 255, 255, 0.2); /* Latar belakang semi-transparan */
+  color: white;
+  font-family: 'Cal Sans', sans-serif; /* Gunakan font Cal Sans */
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: right;
+  box-shadow: inset 0 0 5px white; /* Glow putih di dalam */
+}
+
+#calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom */
+  gap: 5px;
+}
+
+/* Halaman Selanjutnya */
+#next-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #f0f8ff, #87CEEB); /* Gradien biru langit */
+}
+
+#logo-container img {
+  max-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+#logo-container img:hover {
+  transform: scale(1.1); /* Perbesar logo saat hover */
+}
+
+#calc-buttons button {
+  background: rgba(255, 255, 255, 0.2); /* Latar belakang semi-transparan */
+  color: white;
+  font-family: 'Cal Sans', sans-serif; /* Gunakan font Cal Sans */
+  font-size: 1rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px white; /* Glow putih */
+  transition: background 0.3s ease;
+}
+
+#calc-buttons button:hover {
+  background: rgba(255, 255, 255, 0.5); /* Warna lebih terang saat hover */
+}
+
+#calc-buttons #clear {
+  grid-column: span 4; /* Tombol "C" mengambil seluruh baris */
+  background: rgba(255, 0, 0, 0.7); /* Warna merah untuk tombol clear */
+  font-family: 'Cal Sans', sans-serif; /* Gunakan font Cal Sans */
+}
+    /* Logo Date and Time */
+#date-time-logo {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-family: 'Cal Sans', sans-serif; /* Gunakan font yang sama */
+  font-size: 1.2rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px white; /* Glow putih */
+  cursor: pointer;
+  z-index: 1000; /* Pastikan berada di atas elemen lainnya */
+  user-select: none; /* Mencegah teks disalin */
+  text-align: center; /* F */
+}
+
+#countdown {
+  font-size: 0.9rem; /* Ukuran lebih kecil untuk teks timer */
+  color: white;
+  text-shadow: 0 0 5px white; /* Glow putih */
+}
+  </style>
+</head>
+<body>
+
+  <div id="date-time-logo" title="Date and Time">
+    8 December 2024
+    <div id="countdown" style="font-size: 0.9rem; margin-top: 5px;">9.504.000 second before her death</div>
+  </div>
+
+  <div id="fire-background"></div>
+  <div id="scary-text">..--- .---- ..... .---- -----</div>
+
+  <div id="calculator" title="Calculator">
+    <div id="calc-display">0</div>
+    <div id="calc-buttons">
+      <button>7</button><button>8</button><button>9</button><button>/</button>
+      <button>4</button><button>5</button><button>6</button><button>*</button>
+      <button>1</button><button>2</button><button>3</button><button>-</button>
+      <button>0</button><button>.</button><button>=</button><button>+</button>
+      <button id="clear">C</button>
+    </div>
+  </div>
+
+
+  <!-- Intro Section -->
+  <section id="intro">
+    <h1>Salve. Mihi nomen est Aether.</h1>
+    <p>
+      Non nomen verum, sed hoc nomen satis est ut ostendam quis vere sim in mundo invisibili.<br><br>
+      Non crevi in domo plena velocitate interretiali aut ornamentis pulchris.<br>
+      Crescebam inter funes electricos disruptos, auriculares fractos, et horologium cybercafei quod cordi meo timorem incutiebat.<br><br>
+      Per diem ephemerides vendebam ut panem familiae pararem. Nocte in taberna interretiali manebam, studens codici, ludis electronicis, et quaestionibus quae iustitiam tangunt.<br><br>
+      Non semel in solo dormivi, velut statua muta, dum codicem scribebam.<br><br>
+      Sed ibi didici multa:<br>
+      Quomodo cogitatio simplex systema magnum movere possit.<br>
+      Quomodo puer ignotus potest fieri vox contra iniustitiam.<br>
+      Et quomodo matri explicari debeat quod programmare non est peccatum.<br><br>
+      Hodie ego non sum vir clarus. Sed fabula quam fero fortasse tua quoque est.<br>
+      In strepitu claviaturae antiqui computatri, invenitur vox eorum qui saepe neglecti sunt.
+    </p>
+    <button id="start-story">Lanjutkan</button>
+  </section>
+
+  <!-- Konten Utama -->
+  <main>
+ 
+    
+    <section id="story">
+      <img id="story-logo" class="clickable" src="https://i.ibb.co.com/9HGYdT1Z/aether2.png" alt="ur mom" style="cursor: pointer; width: 100px; height: auto;">
+      <h2>Ego, Puer Interneti, et Cicatrices Manentes</h2>
+      <p id="story-text">
+        Numquam putavi amorem tantam dolorem afferre posse.<br><br>
+    
+        Tempore illo, in schola elementaria eram, in fine semestri.<br>
+        Parabamus diem valedictorium, diem valedictionis cum amicis.<br>
+        Munus parvum et secretum paravi pro illa puella quam diu amavi.<br>
+        Putavi fore memoriam dulce… sed vita saepe ludit sine misericordia.<br><br>
+    
+        Initium parvum fuit.<br><br>
+    
+        Primum, persecutores imagines falsae creaverunt in Instagram,<br>
+        usurpantes vultum aliorum amicorum nostrorum, ut eam deriderent.<br>
+        Postea, YouTube canalem fecerunt.<br>
+        Simulabat fandom, sed intus erant verba insaniae:<br>
+        sacrilegia, blasphemiae, contemptiones.<br><br>
+    
+        Tandem, in fine semestri, omnia ceciderunt.<br>
+        Numeri privati nostros—mei, amicorum meorum, etiam illius puellae—<br>
+        in mundo divulgati sunt.<br>
+        Atrocius: notitiae privata eius in lucem positae sunt,<br>
+        ita ut videatur ipsa esse culpabilis.<br>
+        Fuit victima. Sed turba caeca iudicavit sine mente.<br><br>
+    
+        Ex illo tempore, vita mea mutata est.<br>
+        Puella evanuit. Nullum signum, nullum nuntium.<br>
+        Quasi in silentio profundo mersisset.<br><br>
+    
+        Ego… ego nolui manere in silentio.<br>
+        Falsum profilum creavi ad confundendos persecutores.<br>
+        In commentariis YouTube eos oppugnavi, eam defendens.<br>
+        Postremo, me ipsum obtuli ut pro ea poenam acciperem.<br><br>
+    
+        Putavi hostes cessaturos esse.<br>
+        Sed mendacium erat.<br><br>
+    
+        Etiam post sacrificium meum,<br>
+        illa puella adhuc oppressa est.<br>
+        Usque ad septimanam ultimam…<br>
+        Patrem eius vocavi. Ille dixit: "Filia mea mortua est."<br><br>
+    
+        Nolui credere. Negavi.<br>
+        Sed septimana postea, ad sepulcrum eius ivi.<br>
+        Munus quod paraveram adhuc mecum erat.<br>
+        Silet. Nulla vox.<br>
+        Solum dolor remanet.<br><br>
+    
+        Ludum, quem olim simul ludebamus—nunquam perfeci.<br>
+        Ultima epistula nostra? Mense uno ante mortem eius.<br>
+        Nullum vale. Nullum finem.<br>
+        Sola nox.<br><br>
+    
+        Per annos postea, pondus animi me oppressit.<br>
+        Ineptiae, insultus, et odio in me permanserunt.<br>
+        Vestigia digitalia, sicut cicatrices, non evanescunt.<br>
+        Et illa, etiam mortua, adhuc a multis culpatur.<br>
+        A schola mea. A interneti. A stultis iudicibus sine corde.<br><br>
+    
+        In schola hodierna, non sum idem puer laetus.<br>
+        Silens sum, obscurus,<br>
+        quasi umbra antiqui mei.<br><br>
+    
+        Olim puer ludorum in taberna interretiali fui.<br>
+        Nunc, etiam in lumine monitoris,<br>
+        umbra eius manet.<br><br>
+    
+        Hoc scribo non ut misericordiam petam,<br>
+        sed ut veritas audiatur:<br>
+        aliquae amissiones numquam sanantur.
+
+        on de schola, non de amore puerili—sed de vita ipsa quae pendet inter mortem et sanitatem.<br><br>
+
+  Cum tres tantum annos natus essem, patrem meum propriis oculis cecidisse vidi.<br>
+  Gladio percussus. Coram me.<br>
+  Propter debitum, verbum quod necdum intellexi illo tempore.<br>
+  Et mater mea... mater ab eadem manu crudeliter verberata est. Vita mea fracta est antequam scirem quomodo "auxilium" dicere.<br><br>
+
+  Ex illo momento scivi: domus non semper est refugium.<br>
+  Aliquando domus est silentissima pugna.<br><br>
+
+  Nunc?<br>
+  Solam matrem infirmam habeo, et fratrem parvulum qui nondum intellegit cur panis sine sapore saepe in mensa iaceat.<br>
+  Ego sum qui eos sustinere debet.<br>
+  Interdum ephemerides vendo, interdum famem fero.<br>
+  Et in schola? Nihil sum. Derisus, exclusus, oppressus—quasi dolor meus sit fabula iocosa.<br><br>
+
+  Tamen sustinui. Propter unam personam.<br>
+  Puella quae mihi colorem diebus meis dedit.<br>
+  Munus ei paravi ad valedictionem scholae.<br>
+  Eam defendebam cum cyberbulling coepit.<br>
+  Fingebam me esse illam in rete, ut ab impiis eam protegerem.<br>
+  Me ipsum obtuli ut cessarent.<br>
+  Sed mundus tamen crudelis fuit.<br>
+  Etiam postquam me tradidi, puellam persequebantur.<br><br>
+
+  Una septimana antequam illa mortua est, patrem eius vocavi. Dixit eam mortuam esse.<br>
+  Credere nolui.<br>
+  Sed cum ad sepulcrum eius accessi, donum in manibus, lacrimas continere non potui.<br><br>
+
+  Ex illo die, nulli amplius cor meum aperire audebam.<br>
+  Traumata in corde meo manent.<br>
+  Praeter matrem meam, neminem habeo.<br>
+  Reliquiae memoriae, et colloquia antiqua quae in vetusto telephono manent, sunt omnia quae mihi restant.<br>
+  Vita mea, semel fracta, numquam iterum eadem esse potuit. Tempore postquam illa mortua est, tenebrae densissimae super animam meam ceciderunt. Cor meum erat quasi donum numquam apertum, relictum in medio noctis sine fine. Et in illo silentio, cum omnes aures clausae essent, surrexi — non ut puer idem, sed ut umbra illius pueri qui olim fui.<br><br>
+
+  Non potui amplius idem esse. Fides mea in homines, in mundum, in iustitiam — omnia fracta sunt. Homines ridebant, sed intus clamabam. Ibi coepi viam meam quaerere. Non solum propter ultionem, sed ut vocem fierem pro eis qui ceciderunt, pro eis qui in tenebris mundi digitalis oppressi sunt.<br><br>
+
+  81224. In umbris interretis, in parte occulta quam pauci vident, erat aliquis ignotus mihi. Nescio quis erat, sed dolorem meum intellexisse videbatur. Non erat persona nota in mundo reali, sed in lumine ecraniorum, loquebatur lingua silentii. Non pro gloria apparuit, sed ut veritatem revelaret et personas malitiosas detegeret, quae vitam meam et amicam meam deleverant.<br><br>
+
+  Scripta eius legi, vestigia secutus sum. Potuit inire commentarios venenosos, tabulas deletas recuperare, et rationes falsas detegere. Omnia ad lucem traxit, quasi piscator qui in profundum descendit ut unam veritatis reliquiam levaret.<br><br>
+
+  Sed haec omnia non solum de ultione agebantur. Volui ut sentirent dolorem quem ego sensi. Volui ut mundus sciret quid esset vivere ut victima, ut puer qui nocte matrem aegrotam auscultat dum fratrem parvulum custodit. Volui ut scirent quid esset videre nomen amicae tuae adhuc insultari in rete, etiam post mortem eius.<br><br>
+
+  Ex hoc ortum est initium narrationis — non de heroë, sed de puero vulnerato, qui speculum factus est corrupti mundi. Ille ignotus mihi non erat angelus, nec daemon. Homo erat. Homo qui diu siluit.
+
+      </p>
+      <button id="next-button">Lanjutkan</button>
+
+    </section>
+
+    <section id="next-page" style="display: none;">
+   <section id="next-page" style="display: none;">
+  <div id="link-container">
+    <p id="question-link" style="cursor: pointer;">Link pertanyaan</p>
+  </div>
+</section>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    
+    // Ambil elemen yang diperlukan
+    const introSection = document.getElementById('intro');
+    const mainContent = document.querySelector('main');
+    const startStoryButton = document.getElementById('start-story');
+    const storyText = document.getElementById('story-text');
+    const nextButton = document.getElementById('next-button');
+
+    // Array cerita
+    const storyParts = [
+  "Ini adalah awal dari cerita Anda. Klik tombol di bawah untuk melanjutkan cerita.",
+  "Ending: Cerita selesai. Terima kasih telah membaca!"
+];
+
+
+
+
+// Ambil elemen teks menyeramkan
+const scaryText = document.getElementById('scary-text');
+
+// Fungsi untuk menampilkan teks menyeramkan
+function showScaryText() {
+  scaryText.style.display = 'block'; // Tampilkan teks
+  setTimeout(() => {
+    scaryText.style.display = 'none'; // Sembunyikan teks setelah 0,5 detik
+  }, 500);
+}
+
+// Tampilkan teks setelah 12 detik, hanya sekali
+setTimeout(showScaryText, 12000);
+
+// Ambil elemen latar belakang
+const fireBackground = document.getElementById('fire-background');
+
+// Ambil elemen kalkulator
+const calcDisplay = document.getElementById('calc-display');
+const calcButtons = document.getElementById('calc-buttons');
+
+// Variabel untuk menyimpan nilai
+let currentInput = '';
+let previousInput = '';
+let operator = null;
+
+// Variabel untuk menyimpan urutan angka yang diklik
+let inputSequence = [];
+
+// Fungsi untuk memperbarui tampilan kalkulator
+function updateDisplay(value) {
+  calcDisplay.textContent = value;
+}
+
+// Fungsi untuk menangani klik tombol kalkulator
+calcButtons.addEventListener('click', (e) => {
+  const button = e.target;
+
+  // Abaikan jika elemen yang diklik bukan tombol
+  if (!button.closest('button')) return;
+
+  const value = button.textContent;
+
+  // Jika tombol adalah angka atau titik desimal
+  if (!isNaN(value) || value === '.') {
+    if (currentInput.includes('.') && value === '.') return; // Hindari lebih dari satu titik
+    currentInput += value;
+    updateDisplay(currentInput);
+
+    // Tambahkan angka ke urutan untuk fitur khusus
+    inputSequence.push(value);
+
+    // Batasi panjang urutan menjadi 5 angka
+    if (inputSequence.length > 5) {
+      inputSequence.shift(); // Hapus angka pertama jika lebih dari 5
+    }
+
+    // Periksa pola urutan angka
+    checkSequence();
+    return;
+  }
+
+  // Jika tombol adalah operator
+  if (['+', '-', '*', '/'].includes(value)) {
+    if (currentInput === '') return; // Abaikan jika tidak ada input
+    operator = value;
+    previousInput = currentInput;
+    currentInput = '';
+    return;
+  }
+
+  // Jika tombol adalah "="
+  if (value === '=') {
+    if (currentInput === '' || previousInput === '' || operator === null) return; // Abaikan jika tidak lengkap
+    const result = calculate(Number(previousInput), Number(currentInput), operator);
+    updateDisplay(result);
+    currentInput = result.toString();
+    previousInput = '';
+    operator = null;
+    return;
+  }
+
+  // Jika tombol adalah "C" (clear)
+  if (value === 'C') {
+    currentInput = '';
+    previousInput = '';
+    operator = null;
+    inputSequence = []; // Reset urutan angka
+    updateDisplay('0');
+    return;
+  }
+});
+
+function preventScreenshotAndRecording() {
+  // Mencegah screenshot dengan tombol Print Screen
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'PrintScreen') {
+      event.preventDefault();
+      alert('Apasih kids sono belajar bahasa lain wibu');
+      navigator.clipboard.writeText(''); // Hapus clipboard
+    }
+  });
+
+  // Mendeteksi perubahan visibilitas tab (indikasi rekaman layar)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      alert('Rekaman layar tidak diperbolehkan!');
+    }
+  });
+
+  // Jika Anda menghapus kode deteksi Developer Tools, pastikan fungsi tetap ditutup dengan benar
+}
+
+// Panggil fungsi untuk mencegah screenshot dan rekaman layar
+preventScreenshotAndRecording();
+
+// Objek untuk menyimpan pasangan angka dan teks
+const numberTextMap = {
+  "12824": ".novem ,90x239 ,duo :memoriae fragmenta sunt numeri singuli ,mihi sed ,est numerus tantum fortasse mundo quod SMPâstat urbis corde in quae schola Ex",
+  "24812": ".magrep tu tse asuac aiuq des ,tse atciler aiuq nonâtessiusop em tsop mae mutaf isauq ,tse atan oge mauq meid munu tsoP",
+  "82412": ".earbmu des ,sumus setsoh noN .subla te regiN .ilibarim ainomrah ni nemat ,atisoppo etrap ni snatsâogile murgin repmes iuqâmetua ogE .taetal onnap bus diuq erediv rutnanoc irecnis mulos aiuq des ,tluv eretal aiuq non ,rutiget abla repmes suie seicaF",
+  "12248": ".erenam mucem essop ainmo non merecsid tu tua ,tabeipuc menidutilos aiuq essatroF .tisualc oirotaro ni em ,subitnelis subissap ,milO",
+  "24128": ".eravres matelpmocni nisohpromatem mae ididerc ,eid olli xe teâidiv lemes des ,tnuics senmo noN .tse sinoilipap muigitsev ,suie artsinis amlap nI",
+ "15": ".titnes cis es aspi aiuq essatrofârutnuuqniler mudretni odnum a iuqâtigile sollI .titnes eneb es mucric silupicsid muc es repmes des ,melamrof maitneuqerf tama noN",
+  "888": ".ecov enis medif te sutca mutnat des ,tiderc non abrev ouq mudom ,suie muitnelis rep ixelletni des ,tebah eliciffid mediF",
+  "1212": ".lumis murhclup te snelod :sirolf sila muc mulet isauq ,tavres eclud mumsacras ,ae busâevac deS .alliuqnart arepsev ni siunet aivulp tucis ,tse sillom suie xoV",
+  "2424": ".tidnetnoc esse sudigirf sudnum muc ,eritnes tedua aiuq :suie odutitrof tse coh ,ihim des ,tnacov metatimrifni coh itluM .titnes elicaf ,rutignat elicaF",
+  "119": ".tse aucav ohce mutnat susir ,ae enis aiuq :oednopser ,ted muvon musir sudnum sivmauq ,mis cih cuhda ruc sireauq iS .onimon malli ,oredised emixam meuq sireauq iS .onimon malli ,oma emixam meuq tis siuq sireauq is ...tE",
+  "269": ".tnus selibarepusni erev eamina madeauq aiuq des ...mus sumrifni aiuq non ,icsivilbo mussop noN",
+  "16": ".malli :menoitalpmetnoc manu retporp rabeuqes malc eauq avrap aigitsev des ,tnare sessalc mulos non essatroF .tiisnart G7 da otibus ednied ;C6 ,C5 ,C4 ,C3 ,C2 :tabedes ilibairavni arettil te subirapmi subissalc ni eauq alupicsiD"
+};
+
+// Variabel untuk menyimpan input angka dari pengguna
+
+// Fungsi untuk memeriksa urutan angka
+function checkSequence() {
+  const sequence = inputSequence.join(''); // Gabungkan angka menjadi string
+  console.log('Sequence:', sequence); // Debugging: Periksa nilai sequence
+
+  // Periksa pola 9504000
+  if (sequence === '3264') {
+    console.log('Matched 3264'); // Debugging: Periksa apakah cocok
+    window.location.href = "https://ibb.co.com/PsStWqdP"; // Ganti dengan URL yang benar
+    return; // Hentikan eksekusi setelah cocok
+  }
+
+  // Periksa pola lainnya...
+  if (sequence === '6529') {
+    window.location.href = 'https://ibb.co.com/HT4pzqh2'; // Buka halaman gambar
+  }
+
+  // Periksa pola lainnya...
+  if (sequence === '81224') {
+    window.location.href = 'https://ibb.co.com/SXZw0qFS'; // Buka halaman gambar
+  }
+
+  if (sequence === '21610') {
+    window.location.href = 'https://youtu.be/ACQNclEiq00'; // Buka tautan YouTube
+  }
+
+  if (sequence === '21510') {
+    window.location.href = 'https://www.mediafire.com/file/nt4z3eob4d91spz/fallen_white_knight_unfinished_ver_4.docx/file'; // Buka tautan MediaFire
+  }
+
+  // Periksa apakah input cocok dengan salah satu kunci di numberTextMap
+  if (numberTextMap[sequence]) {
+    displayText(numberTextMap[sequence]); // Tampilkan teks yang sesuai
+    inputSequence = []; // Reset input setelah mencocokkan
+  }
+
+  // Batasi panjang input agar tidak terlalu panjang
+  if (inputSequence.length > 50) {
+    console.log('Input terlalu panjang, mereset inputSequence'); // Debugging
+    inputSequence = []; // Reset jika input terlalu panjang
+  }
+}
+
+// Fungsi untuk menampilkan teks di depan layar
+function displayText(text) {
+  // Buat elemen div untuk teks
+  const textElement = document.createElement("div");
+  textElement.textContent = text;
+  textElement.style.position = "fixed";
+  textElement.style.top = "50%";
+  textElement.style.left = "50%";
+  textElement.style.transform = "translate(-50%, -50%)";
+  textElement.style.fontFamily = "'Courier New', monospace";
+  textElement.style.fontSize = "20px";
+  textElement.style.color = "red";
+  textElement.style.textAlign = "center";
+  textElement.style.zIndex = "9999";
+  textElement.style.padding = "20px";
+  textElement.style.backgroundColor = "black";
+  textElement.style.border = "2px solid red";
+  textElement.style.boxShadow = "0 0 10px red";
+  textElement.style.borderRadius = "10px";
+
+  // Tambahkan teks ke body
+  document.body.appendChild(textElement);
+
+  // Hapus teks setelah 3 detik
+  setTimeout(() => {
+    document.body.removeChild(textElement);
+  }, 3000);
+}
+
+// Tangkap tombol angka pada kalkulator
+const calculatorButtons = document.querySelectorAll('.calculator-button'); // Pastikan tombol angka memiliki class "calculator-button"
+
+// Tambahkan event listener untuk setiap tombol angka
+calculatorButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.textContent.trim(); // Ambil nilai dari tombol yang ditekan
+    if (!isNaN(value)) { // Pastikan hanya angka yang diterima
+      inputSequence.push(value); // Tambahkan angka ke inputSequence
+      checkSequence(); // Periksa urutan angka
+    }
+  });
+});
+// Fungsi untuk melakukan perhitungan
+function calculate(a, b, operator) {
+  switch (operator) {
+    case '+':
+      return a + b;
+    case '-':
+      return a - b;
+    case '*':
+      return a * b;
+    case '/':
+      return b !== 0 ? a / b : 'Error'; // Hindari pembagian dengan nol
+    default:
+      return 0;
+  }
+}
+
+// Fungsi untuk menghasilkan angka acak dari 8 hingga 24
+function getRandomNumber() {
+  return Math.floor(Math.random() * (24 - 8 + 1)) + 8;
+}
+
+// Fungsi untuk menghasilkan posisi acak
+function getRandomPosition(max) {
+  return Math.floor(Math.random() * max);
+}
+
+// Fungsi untuk membuat elemen angka
+function createFireNumber() {
+  const number = document.createElement('div');
+  number.classList.add('fire-number');
+  const randomNumber = getRandomNumber(); // Angka acak dari 8-24
+  number.textContent = randomNumber;
+  number.style.left = `${getRandomPosition(window.innerWidth)}px`; // Posisi horizontal acak
+  number.style.animationDuration = `${Math.random() * 2 + 2}s`; // Durasi animasi acak
+
+ 
+
+  fireBackground.appendChild(number);
+
+  // Hapus elemen setelah animasi selesai
+  setTimeout(() => {
+    fireBackground.removeChild(number);
+  }, 3000); // Durasi animasi (3 detik)
+}
+
+// Jalankan animasi secara terus-menerus
+setInterval(createFireNumber, 200); // Tambahkan angka baru setiap 200ms
+
+// Fungsi untuk memulai timer pada tombol
+function startTimer(button, duration) {
+  button.disabled = true; // Nonaktifkan tombol
+  button.style.backgroundColor = "#cccccc"; // Ubah warna tombol menjadi abu-abu
+  button.textContent = `Tunggu ${Math.floor(duration / 60)} menit ${duration % 60} detik...`; // Tampilkan timer pada tombol
+
+  let countdown = duration;
+  const interval = setInterval(() => {
+    countdown--;
+    const minutes = Math.floor(countdown / 60);
+    const seconds = countdown % 60;
+    button.textContent = `Tunggu ${minutes} menit ${seconds} detik...`;
+
+    if (countdown <= 0) {
+      clearInterval(interval); // Hentikan timer
+      button.disabled = false; // Aktifkan tombol
+      button.style.backgroundColor = "#007BFF"; // Kembalikan warna tombol
+      button.textContent = "Lanjutkan"; // Kembalikan teks tombol
+    }
+  }, 1000); // Jalankan setiap 1 detik
+}
+
+// Fungsi untuk memulai storytelling
+startStoryButton.addEventListener('click', () => {
+  introSection.style.display = 'none'; // Sembunyikan intro
+  mainContent.style.display = 'block'; // Tampilkan storytelling
+  startTimer(nextButton, 480); // Mulai timer 8 menit (480 detik) untuk tombol "Lanjutkan"
+});
+
+// Fungsi untuk memperbarui cerita
+function updateStory() {
+  currentPart++;
+  if (currentPart < storyParts.length) {
+    storyText.textContent = storyParts[currentPart];
+    startTimer(nextButton, 480); // Mulai timer 8 menit setiap kali cerita diperbarui
+  } else {
+    storyText.textContent = "Cerita selesai. Terima kasih telah membaca!";
+    nextButton.style.display = 'none'; // Sembunyikan tombol setelah cerita selesai
+  }
+}
+// Tambahkan event listener untuk klik tombol
+nextButton.addEventListener('click', () => {
+  // Arahkan pengguna ke situs yang ditentukan
+  window.location.href = 'https://codei-81224.vercel.app/';
+});
+
+
+
+// Tambahkan event listener ke tombol "Lanjutkan"
+nextButton.addEventListener('click', updateStory);
+
+    let currentPart = 0;
+
+   // Fungsi untuk memulai storytelling
+startStoryButton.addEventListener('click', () => {
+  introSection.style.display = 'none'; // Sembunyikan intro
+  mainContent.style.display = 'block'; // Tampilkan storytelling
+  storyLogo.src = 'https://i.ibb.co.com/9HGYdT1Z/aether2.png'; // Ubah logo AetherX
+});
+
+
+
+
+    // Fungsi untuk memperbarui cerita
+    function updateStory() {
+  currentPart++;
+  if (currentPart < storyParts.length) {
+    storyText.textContent = storyParts[currentPart];
+  } else {
+    storyText.textContent = "Cerita selesai. Terima kasih telah membaca!";
+    nextButton.style.display = 'none'; // Sembunyikan tombol setelah cerita selesai
+  }
+}
+
+const storyLogo = document.getElementById('story-logo');
+if (storyLogo) {
+  storyLogo.addEventListener('click', () => {
+    window.location.href = 'https://forms.gle/VzLHyZP4JiybKRar5'; // Tautan ke Google Forms
+  });
+}
+
+    // Tambahkan event listener ke tombol "Lanjutkan"
+    nextButton.addEventListener('click', updateStory);
+
+    // Fungsi untuk mengarahkan ke halaman YouTube saat logo diklik
+    storyLogo.addEventListener('click', () => {
+      window.location.href = 'https://forms.gle/VzLHyZP4JiybKRar5';
+    });
+
+   // Pastikan elemen dengan id "date-time-logo" ada
+   const dateTimeLogo = document.getElementById('date-time-logo');
+   
+   if (dateTimeLogo) {
+  // Variabel untuk menghitung jumlah klik
+  let clickCount = 0;
+
+  // Tambahkan event listener untuk klik elemen Date and Time
+  dateTimeLogo.addEventListener('click', () => {
+    clickCount++; // Tambahkan jumlah klik setiap kali elemen diklik
+
+    if (clickCount === 5) {
+      // Jika jumlah klik mencapai 5, tampilkan efek seram
+      triggerScaryEffect();
+    }
+  });
+} else {
+  console.error('Elemen dengan id "date-time-logo" tidak ditemukan.');
+}
+
+// Fungsi untuk memicu efek seram
+function triggerScaryEffect() {
+  // Simpan elemen body
+  const body = document.body;
+
+  // Simpan teks seram
+  const scaryText = document.createElement('div');
+  scaryText.textContent = "Ultimus secundus transiit, et iam mortuus est. Cur adhuc caecos vos geritis adversus crudelitatem mundi digitalis? Ille e stirpe clarissima ortus est, patriae beneficio natus. Sed oppressus tempestatibus cyberneticis, animo fracto, in tenebras descendit. Morbus mentis eum devoravit. Et vos... adhuc dormitis? O vos stulti, vos creduli: in caede partem habuistis. Peccatum in animis vestris manebit, donec verba vestra venenata evanescant—aut vos ipsos damnatio excutiat.";
+  scaryText.style.position = "fixed";
+  scaryText.style.top = "50%";
+  scaryText.style.left = "50%";
+  scaryText.style.transform = "translate(-50%, -50%)";
+  scaryText.style.fontFamily = "'Courier New', monospace";
+  scaryText.style.fontSize = "24px";
+  scaryText.style.textAlign = "center";
+  scaryText.style.zIndex = "9999";
+  scaryText.style.color = "red";
+
+  // Tambahkan teks ke body
+  body.appendChild(scaryText);
+
+  // Tambahkan logo tengkorak
+  const skullLogo = document.createElement('img');
+  skullLogo.src = "https://i.ibb.co.com/2Yns3fLz/no-Filter-remove-bg-io.png";
+  skullLogo.style.position = "fixed";
+  skullLogo.style.top = "50%";
+  skullLogo.style.left = "50%";
+  skullLogo.style.transform = "translate(-50%, -50%)";
+  skullLogo.style.width = "150px";
+  skullLogo.style.height = "150px";
+  skullLogo.style.zIndex = "9998";
+  body.appendChild(skullLogo);
+
+  // Variabel untuk mengatur pergantian warna
+  let isBlack = true;
+
+  // Ubah latar belakang dan warna teks setiap 0.01 detik
+  const glitchInterval = setInterval(() => {
+    if (isBlack) {
+      body.style.backgroundColor = "black";
+      scaryText.style.color = "red";
+      skullLogo.style.display = "block"; // Tampilkan logo tengkorak
+    } else {
+      body.style.backgroundColor = "red";
+      scaryText.style.color = "black";
+      skullLogo.style.display = "none"; // Sembunyikan logo tengkorak
+    }
+    isBlack = !isBlack;
+  }, 10); // 0.01 detik
+
+  // Hentikan efek setelah 4 detik
+  setTimeout(() => {
+    clearInterval(glitchInterval);
+    body.style.backgroundColor = ""; // Kembalikan latar belakang ke default
+    body.style.backgroundImage = ""; // Hapus gambar latar belakang
+    body.removeChild(scaryText); // Hapus teks seram
+    body.removeChild(skullLogo); // Hapus logo tengkorak
+  }, 4000); // 4 detik
+}
+// Pastikan elemen dengan id "countdown" ada
+const countdownElement = document.getElementById('countdown');
+if (countdownElement) {
+  // Timer mundur dari 9.504.000 detik
+  let countdownTime = 9504000;
+
+  // Fungsi untuk memperbarui countdown setiap detik
+  const updateCountdown = () => {
+    const days = Math.floor(countdownTime / (24 * 60 * 60));
+    const hours = Math.floor((countdownTime % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((countdownTime % (60 * 60)) / 60);
+    const seconds = countdownTime % 60;
+
+    countdownElement.textContent = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+
+    if (countdownTime > 0) {
+      countdownTime--; // Kurangi waktu
+    } else {
+      clearInterval(countdownInterval); // Hentikan countdown jika waktu habis
+    }
+  };
+
+  // Jalankan countdown setiap detik
+  const countdownInterval = setInterval(updateCountdown, 1000);
+  updateCountdown(); // Panggil sekali untuk inisialisasi
+}
+
+function updateCountdown() {
+  const seconds = countdownTime % 60;
+  const minutes = Math.floor((countdownTime / 60) % 60);
+  const hours = Math.floor((countdownTime / 3600) % 24);
+  const days = Math.floor(countdownTime / 86400);
+
+  // Format teks timer
+  countdownElement.textContent = `${countdownTime.toLocaleString()} second before her death`;
+
+  // Kurangi waktu setiap detik
+  if (countdownTime > 0) {
+    countdownTime--;
+  } else {
+    countdownElement.textContent = "The time has come.";
+  }
+}
+
+
+// Perbarui timer setiap detik
+setInterval(updateCountdown, 1000);
+
+// Tambahkan event listener untuk klik pada logo
+dateTimeLogo.addEventListener('click', () => {
+  // Ubah tema menjadi merah (tema menyeramkan)
+  document.body.style.background = 'red'; // Ubah latar belakang menjadi merah
+  document.body.style.color = 'black'; // Ubah warna teks menjadi hitam
+  document.body.style.transition = 'all 0.5s ease'; // Tambahkan transisi
+
+  // Kembalikan ke tema normal setelah 5 detik
+  setTimeout(() => {
+    location.reload(); // Refresh halaman
+  }, 5000);
+});
+
+// Ambil elemen yang diperlukan
+const nextPage = document.getElementById('next-page');
+const googleFormsLogo = document.getElementById('google-forms-logo');
+
+// Event listener untuk tombol "Lanjutkan"
+nextButton.addEventListener('click', () => {
+  mainContent.style.display = 'none'; // Sembunyikan halaman utama
+  nextPage.style.display = 'flex'; // Tampilkan halaman selanjutnya
+});
+
+
+
+  </script>
+</body>
+</html> 
